@@ -1,0 +1,10 @@
+# Xcode
+# FocusTool37.xcodeproj is tracked: the project is edited in Xcode now, not
+# generated. Only the per-user state inside it stays ignored.
+build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+
+# macOS
+.DS_Store

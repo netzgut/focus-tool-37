@@ -1,0 +1,30 @@
+--disable blankLinesAtStartOfScope
+--disable blockComments
+--disable redundantSelf
+
+--elseposition same-line
+--guardelse same-line
+--emptybraces spaced
+
+--disable redundantType
+
+--semicolons never
+
+--disable sortedSwitchCases
+
+--disable trailingCommas
+
+--disable unusedArguments
+
+--maxwidth 140
+
+--wraparguments after-first
+--wrapparameters preserve
+--wrapcollections before-first
+--wraptypealiases after-first
+
+--disable wrapMultilineStatementBraces
+
+--ifdef no-indent
+
+--disable indent

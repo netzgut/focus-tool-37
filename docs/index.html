@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1" />
+        <title>Focus Tool 37</title>
+        <meta name="description"
+              content="A macOS menu-bar tool that moves focus to the nearest window in a direction with a keyboard shortcut, and brings the mouse cursor along." />
+        <meta property="og:title"
+              content="Focus Tool 37" />
+        <meta property="og:description"
+              content="Move focus between windows with the keyboard. The cursor comes along." />
+        <meta property="og:image"
+              content="icon.png" />
+        <link rel="icon"
+              type="image/png"
+              href="favicon.png" />
+        <link rel="apple-touch-icon"
+              href="icon.png" />
+        <style>
+            :root {
+                --bg: #f6f8f9;
+                --surface: #ffffff;
+                --text: #1b2428;
+                --muted: #5b6970;
+                --line: #dde4e7;
+                --accent: #2a6b80;
+                --accent-hover: #225869;
+                --accent-text: #ffffff;
+                --kbd-bg: #eef2f4;
+                --kbd-line: #cfd8dc;
+                --window: #e7edf0;
+                --window-line: #c3cfd4;
+                color-scheme: light;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                :root:not([data-theme="light"]) {
+                    --bg: #12181b;
+                    --surface: #1a2226;
+                    --text: #e6ecee;
+                    --muted: #9aa8ae;
+                    --line: #2b363b;
+                    --accent: #5aa7bf;
+                    --accent-hover: #74b8cd;
+                    --accent-text: #0d1417;
+                    --kbd-bg: #232d32;
+                    --kbd-line: #3a474d;
+                    --window: #222c31;
+                    --window-line: #3a474d;
+                    color-scheme: dark;
+                }
+            }
+
+            :root[data-theme="dark"] {
+                --bg: #12181b;
+                --surface: #1a2226;
+                --text: #e6ecee;
+                --muted: #9aa8ae;
+                --line: #2b363b;
+                --accent: #5aa7bf;
+                --accent-hover: #74b8cd;
+                --accent-text: #0d1417;
+                --kbd-bg: #232d32;
+                --kbd-line: #3a474d;
+                --window: #222c31;
+                --window-line: #3a474d;
+                color-scheme: dark;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                background: var(--bg);
+                color: var(--text);
+                font:
+                    17px/1.6 -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    system-ui,
+                    sans-serif;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            main {
+                max-width: 720px;
+                margin: 0 auto;
+                padding: 72px 16px 48px;
+            }
+
+            /* Header */
+
+            .hero {
+                text-align: center;
+            }
+
+            .hero img {
+                width: 160px;
+                height: 160px;
+            }
+
+            h1 {
+                margin: 12px 0 4px;
+                font-size: 2.4rem;
+                line-height: 1.15;
+                letter-spacing: -0.02em;
+            }
+
+            .tagline {
+                margin: 0 auto;
+                max-width: 30em;
+                color: var(--muted);
+                font-size: 1.15rem;
+            }
+
+            .actions {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+                margin: 28px 0 12px;
+            }
+
+            .button {
+                display: inline-block;
+                padding: 11px 22px;
+                border-radius: 10px;
+                border: 1px solid var(--line);
+                color: var(--text);
+                background: var(--surface);
+                font-weight: 600;
+                text-decoration: none;
+            }
+
+            .button:hover {
+                border-color: var(--muted);
+            }
+
+            .button.primary {
+                background: var(--accent);
+                border-color: var(--accent);
+                color: var(--accent-text);
+            }
+
+            .button.primary:hover {
+                background: var(--accent-hover);
+                border-color: var(--accent-hover);
+            }
+
+            .button:focus-visible {
+                outline: 3px solid var(--accent);
+                outline-offset: 2px;
+            }
+
+            .meta {
+                margin: 0;
+                color: var(--muted);
+                font-size: 0.9rem;
+                text-align: center;
+            }
+
+            /* Sections */
+
+            section {
+                margin-top: 64px;
+            }
+
+            h2 {
+                margin: 0 0 12px;
+                font-size: 1.35rem;
+                letter-spacing: -0.01em;
+            }
+
+            p {
+                margin: 0 0 14px;
+            }
+
+            a {
+                color: var(--accent);
+            }
+
+            kbd {
+                display: inline-block;
+                min-width: 1.6em;
+                padding: 1px 6px;
+                border: 1px solid var(--kbd-line);
+                border-bottom-width: 2px;
+                border-radius: 5px;
+                background: var(--kbd-bg);
+                font:
+                    600 0.85em/1.4 -apple-system,
+                    BlinkMacSystemFont,
+                    system-ui,
+                    sans-serif;
+                text-align: center;
+                white-space: nowrap;
+            }
+
+            /* Illustration: focus jumps right and the cursor follows */
+
+            figure {
+                margin: 0 0 20px;
+                padding: 20px;
+                border: 1px solid var(--line);
+                border-radius: 14px;
+                background: var(--surface);
+            }
+
+            figure svg {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+
+            figcaption {
+                margin-top: 10px;
+                color: var(--muted);
+                font-size: 0.9rem;
+                text-align: center;
+            }
+
+            .win {
+                fill: var(--window);
+                stroke: var(--window-line);
+                stroke-width: 1.5;
+            }
+            .bar {
+                fill: var(--window-line);
+            }
+            .target {
+                fill: none;
+                stroke: var(--accent);
+                stroke-width: 4;
+            }
+            .arrow {
+                fill: none;
+                stroke: var(--muted);
+                stroke-width: 2;
+                stroke-dasharray: 5 5;
+            }
+            .arrowhead {
+                fill: var(--muted);
+            }
+            .cursor {
+                fill: var(--text);
+                stroke: var(--surface);
+                stroke-width: 1.5;
+            }
+
+            /* Shortcut table */
+
+            .table-wrap {
+                overflow-x: auto;
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                background: var(--surface);
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 0.95rem;
+            }
+
+            th,
+            td {
+                padding: 10px 14px;
+                text-align: left;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .combo {
+                white-space: nowrap;
+            }
+
+            tr:last-child td {
+                border-bottom: none;
+            }
+
+            th {
+                color: var(--muted);
+                font-weight: 600;
+                font-size: 0.85rem;
+            }
+
+            .note {
+                margin-top: 12px;
+                color: var(--muted);
+                font-size: 0.95rem;
+            }
+
+            /* Feature list */
+
+            ul.points {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 12px;
+            }
+
+            ul.points li {
+                padding: 16px 18px;
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                background: var(--surface);
+            }
+
+            ul.points strong {
+                display: block;
+                margin-bottom: 4px;
+            }
+
+            ul.points span {
+                color: var(--muted);
+                font-size: 0.95rem;
+            }
+
+            ol.passes {
+                margin: 0 0 14px;
+                padding-left: 1.4em;
+            }
+
+            ol.passes li {
+                margin-bottom: 8px;
+            }
+
+            footer {
+                margin-top: 72px;
+                padding-top: 20px;
+                border-top: 1px solid var(--line);
+                color: var(--muted);
+                font-size: 0.9rem;
+                text-align: center;
+            }
+
+            footer a {
+                color: inherit;
+            }
+
+            @media (max-width: 520px) {
+                main {
+                    padding-top: 48px;
+                }
+                h1 {
+                    font-size: 2rem;
+                }
+                .hero img {
+                    width: 128px;
+                    height: 128px;
+                }
+                th,
+                td {
+                    padding: 8px 10px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <header class="hero">
+                <img src="icon.png"
+                     alt="Focus Tool 37 app icon" />
+                <h1>Focus Tool 37</h1>
+                <p class="tagline">
+                    Move focus between windows with the keyboard,
+                    and bring the mouse cursor along.
+                </p>
+
+                <div class="actions">
+                    <a class="button primary"
+                       href="https://github.com/netzgut/focus-tool-37/releases/latest">
+                       Download for macOS
+                    </a>
+                    <a class="button"
+                       href="https://github.com/netzgut/focus-tool-37">
+                       View on GitHub
+                    </a>
+                </div>
+                <p class="meta">
+                    macOS 14 or later &middot; Free and open source (Apache 2.0)
+                </p>
+            </header>
+
+            <section aria-labelledby="what">
+                <h2 id="what">What it does</h2>
+
+                <figure>
+                    <svg viewBox="0 0 640 240"
+                         role="img"
+                         aria-labelledby="fig-title">
+                        <title id="fig-title">
+                            Pressing Option-Command-L moves focus from the left
+                            window to the nearest window on the right, and the
+                            cursor moves to its centre.
+                        </title>
+                        <defs>
+                            <marker id="head"
+                                    viewBox="0 0 10 10"
+                                    refX="8"
+                                    refY="5"
+                                    markerWidth="8"
+                                    markerHeight="8"
+                                    orient="auto">
+                                <path class="arrowhead"
+                                      d="M0,0 L10,5 L0,10 z" />
+                            </marker>
+                        </defs>
+
+                        <!-- source window -->
+                        <rect class="win"
+                              x="20"
+                              y="40"
+                              width="200"
+                              height="150"
+                              rx="10" />
+                        <rect class="bar"
+                              x="20"
+                              y="40"
+                              width="200"
+                              height="4"
+                              rx="2" />
+
+                        <!-- window above, not chosen -->
+                        <rect class="win"
+                              x="300"
+                              y="10"
+                              width="140"
+                              height="70"
+                              rx="10" />
+
+                        <!-- target window -->
+                        <rect class="win"
+                              x="290"
+                              y="110"
+                              width="210"
+                              height="120"
+                              rx="10" />
+                        <rect class="target"
+                              x="290"
+                              y="110"
+                              width="210"
+                              height="120"
+                              rx="10" />
+
+                        <!-- farther window, not chosen -->
+                        <rect class="win"
+                              x="530"
+                              y="60"
+                              width="90"
+                              height="140"
+                              rx="10" />
+
+                        <!-- jump -->
+                        <path class="arrow"
+                              d="M150,115 C220,115 300,170 372,170"
+                              marker-end="url(#head)" />
+
+                        <!-- cursor at the target's centre -->
+                        <path class="cursor"
+                              d="M395,166 l0,22 l6,-6 l4,10 l4,-2 l-4,-10 l8,0 z" />
+                    </svg>
+                    <figcaption>
+                        <kbd>⌥⌘L</kbd> focuses the nearest window to the right,
+                        and the pointer lands in its middle.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    Press <kbd>⌥⌘L</kbd> and focus jumps to the nearest window
+                    to the right, across every window on the current Space and
+                    on every display.
+                    The mouse pointer lands in the middle of that window, so
+                    switching to the mouse doesn't mean following the focus
+                    by hand.
+                </p>
+                <p>
+                    Focus Tool 37 is a menu-bar agent: no Dock icon and no app
+                    switcher entry, except while its settings window is open.
+                </p>
+            </section>
+
+            <section aria-labelledby="shortcuts">
+                <h2 id="shortcuts">Shortcuts</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Action</th>
+                                <th scope="col">Vim keys</th>
+                                <th scope="col">Arrow keys</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Focus left / down / up / right</td>
+                                <td>
+                                    <span class="combo"><kbd>⌥⌘</kbd> H J K L</span
+                                    >
+                                </td>
+                                <td>
+                                    <span class="combo"><kbd>⌥⌘</kbd> ← ↓ ↑ →</span
+                                    >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Same app only <em>(off by default)</em></td>
+                                <td>
+                                    <span class="combo"><kbd>⌥⌘⇧</kbd> H J K L</span
+                                    >
+                                </td>
+                                <td>
+                                    <span class="combo"><kbd>⌥⌘⇧</kbd> ← ↓ ↑ →</span
+                                    >
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="note">
+                    Both key-presets are on by default and work at the same time.
+                    Custom shortcuts can be added in the settings, which warn
+                    before saving a combo that collides with a system shortcut.
+                </p>
+            </section>
+
+            <section aria-labelledby="details">
+                <h2 id="details">Details</h2>
+                <ul class="points">
+                    <li>
+                        <strong>Physical key positions</strong>
+                        <span>
+                            Shortcuts are bound to where a key sits, not the
+                            character on it, so <kbd>⌥⌘</kbd>HJKL stays under
+                            the same fingers on any layout.
+                        </span>
+                    </li>
+                    <li>
+                        <strong>Focus outline</strong>
+                        <span>
+                            A coloured border briefly traces the newly focused
+                            window, following its corner radius where it can.
+                        </span>
+                    </li>
+                    <li>
+                        <strong>Every display</strong>
+                        <span>
+                            Moving left or right simply continues onto the next monitor
+                            when the current one runs out. A dead end does nothing.
+                        </span>
+                    </li>
+                    <li>
+                        <strong>VoiceOver</strong>
+                        <span>
+                            Every setting is labelled, and a focus move is
+                            announced with the app and window title.
+                        </span>
+                    </li>
+                </ul>
+            </section>
+
+            <section aria-labelledby="choice">
+                <h2 id="choice">How the target window is chosen</h2>
+                <p>
+                    The target is found by plain geometry over the visible
+                    windows, in three passes:
+                </p>
+                <ol class="passes">
+                    <li>
+                        <strong>Overlapping windows</strong> whose centre lies
+                        beyond the current window's centre in the direction of
+                        travel. The nearest centre wins, so repeated presses
+                        walk through a stack window by window.
+                    </li>
+                    <li>
+                        <strong>The edge band:</strong> windows beyond the
+                        current window's edge that overlap it sideways. The
+                        smallest gap wins.
+                    </li>
+                    <li>
+                        <strong>A ±45° cone</strong> as a fallback, when nothing
+                        lies squarely in that direction.
+                    </li>
+                </ol>
+                <p>
+                    Windows hidden behind others are valid targets, so
+                    directional navigation doubles as a window switcher.
+                </p>
+            </section>
+
+            <section aria-labelledby="requirements">
+                <h2 id="requirements">Requirements</h2>
+                <p>
+                    macOS 14 or later, and the Accessibility permission
+                </p>
+                <p>English and German localizations are included.</p>
+            </section>
+
+            <section aria-labelledby="ai-disclosure">
+                <h2>AI Disclosure</h2>
+                <p>This project was built with the help of Claude.</p>
+                <p>
+                    I've developed quite a few differnt iOS apps, starting in
+                    Swift-less times, but I had no prior experience with
+                    developing AppKit apps. That's why AI can bridge the gap to
+                    get the project up and running and help with implementing
+                    the details, creating a learning experience. It's a tool,
+                    and should be used as such, not as a replacement for the
+                    full process.
+                </p>
+            </section>
+
+            <footer>
+                <p>
+                    Copyright © 2026 Netzgut GmbH ·
+                    <a href="https://github.com/netzgut/focus-tool-37/blob/main/LICENSE">Apache License 2.0</a>
+                    &middot;
+                    <a href="https://github.com/netzgut/focus-tool-37">Source on GitHub</a>
+                </p>
+            </footer>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+excluded:
+ - Pods
+ - Carthage
+ # Vendored MSCircularSlider (Mohamed Shahawy, 2017). Kept diffable against upstream rather
+ # than reformatted to our rules, so it is not ours to lint.
+ - fruit/ui/components/msslider
+ # Vendored SkyFloatingLabelTextField (Skyscanner Ltd, Apache 2.0), renamed. Same reasoning:
+ # the `titleFormatter`/`errorMessage`/`selectedTitle` surface is theirs, not ours to reshape.
+ - fruit/ui/components/FRTextField.swift
+
+disabled_rules:
+ - line_length
+ - todo
+ - function_body_length
+ - force_try
+ - multiple_closures_with_trailing_closure
+ - identifier_name
+ - function_name_whitespace
+

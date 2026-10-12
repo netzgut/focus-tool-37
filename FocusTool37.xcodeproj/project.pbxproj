@@ -1,0 +1,579 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0C8DDB0627DF34431CBAA5D6 /* KeyCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6B79DB0BB264E369A7DBCA /* KeyCap.swift */; };
+		1A37A55E75000000000000B2 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 1A37A55E75000000000000A2 /* AppIcon.icon */; };
+		1A37A55E75000000000000B3 /* OnboardingWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A37A55E75000000000000A3 /* OnboardingWindowController.swift */; };
+		1A37A55E75000000000000B4 /* AboutPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A37A55E75000000000000A4 /* AboutPane.swift */; };
+		1A37A55E75000000000000B5 /* IgnoredAppsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A37A55E75000000000000A5 /* IgnoredAppsView.swift */; };
+		1A37A55E75000000000000B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A37A55E75000000000000A6 /* Assets.xcassets */; };
+		1D9476131C37D3F8C29BE323 /* HotKeyPlanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B17106FF5B64C3E920A7AC /* HotKeyPlanTests.swift */; };
+		214161186AC7D456CEFAED03 /* KeyboardFocusEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6FBCDEA4DEE80F800AFC79 /* KeyboardFocusEngine.swift */; };
+		262D15EF6AD42F4C2A7008CD /* ShortcutRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09E3C776FB64480A1F7F66B /* ShortcutRecorderView.swift */; };
+		3F89A6D63CB16D7D55A05CCB /* LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92F88DBAF052EE91FBAEE73 /* LoginItem.swift */; };
+		42472CDA63D951CE16DEA1DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC71F94464CA5FF1EE0FE2CC /* AppDelegate.swift */; };
+		4B1032A91503E7EA594E0E2D /* DirectionalFocusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F87ECF6FCEB0DE0D5AA557E /* DirectionalFocusTests.swift */; };
+		5940A24C1D3B9DF9911BA3CB /* DirectionalFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB159CDA6AB8280E30AFF3 /* DirectionalFocus.swift */; };
+		6346EED9DFA6084021BAF4F7 /* CursorPulse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC604D22668391D891B6336 /* CursorPulse.swift */; };
+		668502FD1B2719BDC752C140 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EF114CFC13A79AB7C68F2 /* main.swift */; };
+		67B7805DDB07224919DF222F /* ShortcutConflicts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0097F4541D89555F7E6724C /* ShortcutConflicts.swift */; };
+		75B09F8D3664D1862A1CFD1B /* SettingsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBDF8DBE9CCE77AF25DAC30 /* SettingsPane.swift */; };
+		7965A171F5AE5F6F884AC830 /* AXHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46755BFB5536C3C65A646A46 /* AXHelpers.swift */; };
+		7B920282C8AEF5CFB45772FA /* FocusHighlightOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6024EB4F103D6A27B2AFE0F6 /* FocusHighlightOverlay.swift */; };
+		7C359587DD840F70833532B8 /* SettingsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B99490BEAE45BA53EB4888 /* SettingsRow.swift */; };
+		807AF41F0A9C1A22D77762A3 /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7AF3CC232EEF1BD1D5FADA9 /* SettingsDetailViewController.swift */; };
+		879FDC63F5987300282471F7 /* VoiceOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74095E6E455763990DE33EFD /* VoiceOver.swift */; };
+		8A1C5D9316DCA9FBA7EDCC38 /* KeyCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6B79DB0BB264E369A7DBCA /* KeyCap.swift */; };
+		8BCE6B8F07C38335F0F32C45 /* HotKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDFF52C6C0BCD3C937FA10D /* HotKeyManager.swift */; };
+		99BE0307F1CBF50CC6619DC9 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF01F9711B14ABFC2897489 /* PreferencesWindowController.swift */; };
+		A12EA309C32A2EF90E9921D2 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9E75BE5270305A2CDC1F95 /* Preferences.swift */; };
+		B22F77CC287AA750D9E798DA /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B9C0078EF7689F04BE6DFD0E /* Localizable.xcstrings */; };
+		BA4EB378CB2CFBDB58580E4E /* KeyCapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F41DEAA76ABBDE08FF9707 /* KeyCapTests.swift */; };
+		BD2F3760767BD8FEABBACBD8 /* SettingsSidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D09857FBE32AB699202078 /* SettingsSidebarViewController.swift */; };
+		BF9B9B85F16FDE6BEF984918 /* CursorWarp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27AD0F7910F1E7F0DE1A614 /* CursorWarp.swift */; };
+		CF01B97D49B20BD673C644B9 /* Displays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD251C5381AF2065F55E194 /* Displays.swift */; };
+		D592A19585FC67EB5DB5A328 /* WindowEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C883978A193FF03D9292ADE /* WindowEnumerator.swift */; };
+		EFCE6FA8F1514FB79B499FF3 /* HotKeyPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEA348F7857C71908AECE97 /* HotKeyPlan.swift */; };
+		F32D6F54D8E982237185EF83 /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D1178E2815DC71CE0A79D1 /* StatusItemController.swift */; };
+		F79F5D841931F8020F7F1CFD /* DirectionalFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB159CDA6AB8280E30AFF3 /* DirectionalFocus.swift */; };
+		FBBFC74A299EEB415AA0F0EF /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6269CE222F6048D61A05C6 /* Accessibility.swift */; };
+		FBC354832D2EBD212D5797EE /* HotKeyPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEA348F7857C71908AECE97 /* HotKeyPlan.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		08B99490BEAE45BA53EB4888 /* SettingsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRow.swift; sourceTree = "<group>"; };
+		0BF01F9711B14ABFC2897489 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		1A37A55E75000000000000A2 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		1A37A55E75000000000000A3 /* OnboardingWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWindowController.swift; sourceTree = "<group>"; };
+		1A37A55E75000000000000A4 /* AboutPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPane.swift; sourceTree = "<group>"; };
+		1A37A55E75000000000000A5 /* IgnoredAppsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredAppsView.swift; sourceTree = "<group>"; };
+		1A37A55E75000000000000A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1EAB159CDA6AB8280E30AFF3 /* DirectionalFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalFocus.swift; sourceTree = "<group>"; };
+		21B17106FF5B64C3E920A7AC /* HotKeyPlanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyPlanTests.swift; sourceTree = "<group>"; };
+		2A58DC4C60E7F38F305EDAEC /* FocusTool37.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusTool37.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A6269CE222F6048D61A05C6 /* Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
+		2CBDF8DBE9CCE77AF25DAC30 /* SettingsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPane.swift; sourceTree = "<group>"; };
+		2F87ECF6FCEB0DE0D5AA557E /* DirectionalFocusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalFocusTests.swift; sourceTree = "<group>"; };
+		3A5EF114CFC13A79AB7C68F2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		46755BFB5536C3C65A646A46 /* AXHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AXHelpers.swift; sourceTree = "<group>"; };
+		4BEA348F7857C71908AECE97 /* HotKeyPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyPlan.swift; sourceTree = "<group>"; };
+		4C883978A193FF03D9292ADE /* WindowEnumerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowEnumerator.swift; sourceTree = "<group>"; };
+		4F6FBCDEA4DEE80F800AFC79 /* KeyboardFocusEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardFocusEngine.swift; sourceTree = "<group>"; };
+		4FC604D22668391D891B6336 /* CursorPulse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorPulse.swift; sourceTree = "<group>"; };
+		57F41DEAA76ABBDE08FF9707 /* KeyCapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCapTests.swift; sourceTree = "<group>"; };
+		59D09857FBE32AB699202078 /* SettingsSidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSidebarViewController.swift; sourceTree = "<group>"; };
+		6024EB4F103D6A27B2AFE0F6 /* FocusHighlightOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusHighlightOverlay.swift; sourceTree = "<group>"; };
+		6EDFF52C6C0BCD3C937FA10D /* HotKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyManager.swift; sourceTree = "<group>"; };
+		74095E6E455763990DE33EFD /* VoiceOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceOver.swift; sourceTree = "<group>"; };
+		7BD251C5381AF2065F55E194 /* Displays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Displays.swift; sourceTree = "<group>"; };
+		961E7D61EBDF8DD4A3A7CDBE /* FocusTool37.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FocusTool37.entitlements; sourceTree = "<group>"; };
+		A7AF3CC232EEF1BD1D5FADA9 /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
+		B27AD0F7910F1E7F0DE1A614 /* CursorWarp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorWarp.swift; sourceTree = "<group>"; };
+		B9C0078EF7689F04BE6DFD0E /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		C92F88DBAF052EE91FBAEE73 /* LoginItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItem.swift; sourceTree = "<group>"; };
+		D0097F4541D89555F7E6724C /* ShortcutConflicts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutConflicts.swift; sourceTree = "<group>"; };
+		DF690F31EB7BAC5A4DBEDE68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E09E3C776FB64480A1F7F66B /* ShortcutRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutRecorderView.swift; sourceTree = "<group>"; };
+		E1463E1D9228568285CF84C3 /* FocusTool37Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FocusTool37Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA6B79DB0BB264E369A7DBCA /* KeyCap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCap.swift; sourceTree = "<group>"; };
+		EE9E75BE5270305A2CDC1F95 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		F5D1178E2815DC71CE0A79D1 /* StatusItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemController.swift; sourceTree = "<group>"; };
+		FC71F94464CA5FF1EE0FE2CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		041D7C1435AD741AF69B9AB7 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				4FC604D22668391D891B6336 /* CursorPulse.swift */,
+				6024EB4F103D6A27B2AFE0F6 /* FocusHighlightOverlay.swift */,
+				74095E6E455763990DE33EFD /* VoiceOver.swift */,
+			);
+			path = Feedback;
+			sourceTree = "<group>";
+		};
+		275CAB14C9465A2D7FA9F1CB /* System */ = {
+			isa = PBXGroup;
+			children = (
+				2A6269CE222F6048D61A05C6 /* Accessibility.swift */,
+				46755BFB5536C3C65A646A46 /* AXHelpers.swift */,
+				B27AD0F7910F1E7F0DE1A614 /* CursorWarp.swift */,
+				7BD251C5381AF2065F55E194 /* Displays.swift */,
+				C92F88DBAF052EE91FBAEE73 /* LoginItem.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		44E7586DB286F4AC8A9EF842 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1A37A55E75000000000000A2 /* AppIcon.icon */,
+				1A37A55E75000000000000A6 /* Assets.xcassets */,
+				961E7D61EBDF8DD4A3A7CDBE /* FocusTool37.entitlements */,
+				DF690F31EB7BAC5A4DBEDE68 /* Info.plist */,
+				B9C0078EF7689F04BE6DFD0E /* Localizable.xcstrings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6AF98F09CCB4D863DBEC062B /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				2F87ECF6FCEB0DE0D5AA557E /* DirectionalFocusTests.swift */,
+				21B17106FF5B64C3E920A7AC /* HotKeyPlanTests.swift */,
+				57F41DEAA76ABBDE08FF9707 /* KeyCapTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		74B518D326E8051A72E223E4 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				D45FCA2A416EB79F2ED05097 /* App */,
+				041D7C1435AD741AF69B9AB7 /* Feedback */,
+				D8C103B185B5F19BEDC6C309 /* Focus */,
+				9A03020AF0A7D58BC51BB3CE /* Interface */,
+				275CAB14C9465A2D7FA9F1CB /* System */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		9A03020AF0A7D58BC51BB3CE /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				1A37A55E75000000000000A4 /* AboutPane.swift */,
+				1A37A55E75000000000000A5 /* IgnoredAppsView.swift */,
+				1A37A55E75000000000000A3 /* OnboardingWindowController.swift */,
+				0BF01F9711B14ABFC2897489 /* PreferencesWindowController.swift */,
+				A7AF3CC232EEF1BD1D5FADA9 /* SettingsDetailViewController.swift */,
+				2CBDF8DBE9CCE77AF25DAC30 /* SettingsPane.swift */,
+				08B99490BEAE45BA53EB4888 /* SettingsRow.swift */,
+				59D09857FBE32AB699202078 /* SettingsSidebarViewController.swift */,
+				D0097F4541D89555F7E6724C /* ShortcutConflicts.swift */,
+				E09E3C776FB64480A1F7F66B /* ShortcutRecorderView.swift */,
+				F5D1178E2815DC71CE0A79D1 /* StatusItemController.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		A8E0F8463833E7575F1210EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A58DC4C60E7F38F305EDAEC /* FocusTool37.app */,
+				E1463E1D9228568285CF84C3 /* FocusTool37Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C5F1F01BF793A16F99481332 = {
+			isa = PBXGroup;
+			children = (
+				44E7586DB286F4AC8A9EF842 /* Resources */,
+				74B518D326E8051A72E223E4 /* Sources */,
+				6AF98F09CCB4D863DBEC062B /* Tests */,
+				A8E0F8463833E7575F1210EC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D45FCA2A416EB79F2ED05097 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				FC71F94464CA5FF1EE0FE2CC /* AppDelegate.swift */,
+				3A5EF114CFC13A79AB7C68F2 /* main.swift */,
+				EE9E75BE5270305A2CDC1F95 /* Preferences.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D8C103B185B5F19BEDC6C309 /* Focus */ = {
+			isa = PBXGroup;
+			children = (
+				1EAB159CDA6AB8280E30AFF3 /* DirectionalFocus.swift */,
+				6EDFF52C6C0BCD3C937FA10D /* HotKeyManager.swift */,
+				4BEA348F7857C71908AECE97 /* HotKeyPlan.swift */,
+				4F6FBCDEA4DEE80F800AFC79 /* KeyboardFocusEngine.swift */,
+				EA6B79DB0BB264E369A7DBCA /* KeyCap.swift */,
+				4C883978A193FF03D9292ADE /* WindowEnumerator.swift */,
+			);
+			path = Focus;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		08EA16EE76FEA31B66467704 /* FocusTool37Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1226A27AC83D8F4A2F00EA14 /* Build configuration list for PBXNativeTarget "FocusTool37Tests" */;
+			buildPhases = (
+				09797D0648DFB80262BB287D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FocusTool37Tests;
+			packageProductDependencies = (
+			);
+			productName = FocusTool37Tests;
+			productReference = E1463E1D9228568285CF84C3 /* FocusTool37Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0BB6F48D2BD2D3ADE2BBB7AB /* FocusTool37 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 033B7B54D192B284CC4915F0 /* Build configuration list for PBXNativeTarget "FocusTool37" */;
+			buildPhases = (
+				A5DE00DF5BC19894A8D08BFC /* Sources */,
+				D5500DAB9579A7294ECB3563 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FocusTool37;
+			packageProductDependencies = (
+			);
+			productName = FocusTool37;
+			productReference = 2A58DC4C60E7F38F305EDAEC /* FocusTool37.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AF09870E61AD60B938E8F970 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					0BB6F48D2BD2D3ADE2BBB7AB = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 6E2A655663BC5DA4A2D5F1B6 /* Build configuration list for PBXProject "FocusTool37" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				de,
+				en,
+			);
+			mainGroup = C5F1F01BF793A16F99481332;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A8E0F8463833E7575F1210EC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0BB6F48D2BD2D3ADE2BBB7AB /* FocusTool37 */,
+				08EA16EE76FEA31B66467704 /* FocusTool37Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D5500DAB9579A7294ECB3563 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B22F77CC287AA750D9E798DA /* Localizable.xcstrings in Resources */,
+				1A37A55E75000000000000B2 /* AppIcon.icon in Resources */,
+				1A37A55E75000000000000B6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		09797D0648DFB80262BB287D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5940A24C1D3B9DF9911BA3CB /* DirectionalFocus.swift in Sources */,
+				4B1032A91503E7EA594E0E2D /* DirectionalFocusTests.swift in Sources */,
+				8A1C5D9316DCA9FBA7EDCC38 /* KeyCap.swift in Sources */,
+				BA4EB378CB2CFBDB58580E4E /* KeyCapTests.swift in Sources */,
+				FBC354832D2EBD212D5797EE /* HotKeyPlan.swift in Sources */,
+				1D9476131C37D3F8C29BE323 /* HotKeyPlanTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5DE00DF5BC19894A8D08BFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7965A171F5AE5F6F884AC830 /* AXHelpers.swift in Sources */,
+				FBBFC74A299EEB415AA0F0EF /* Accessibility.swift in Sources */,
+				42472CDA63D951CE16DEA1DB /* AppDelegate.swift in Sources */,
+				6346EED9DFA6084021BAF4F7 /* CursorPulse.swift in Sources */,
+				BF9B9B85F16FDE6BEF984918 /* CursorWarp.swift in Sources */,
+				F79F5D841931F8020F7F1CFD /* DirectionalFocus.swift in Sources */,
+				CF01B97D49B20BD673C644B9 /* Displays.swift in Sources */,
+				7B920282C8AEF5CFB45772FA /* FocusHighlightOverlay.swift in Sources */,
+				8BCE6B8F07C38335F0F32C45 /* HotKeyManager.swift in Sources */,
+				EFCE6FA8F1514FB79B499FF3 /* HotKeyPlan.swift in Sources */,
+				0C8DDB0627DF34431CBAA5D6 /* KeyCap.swift in Sources */,
+				214161186AC7D456CEFAED03 /* KeyboardFocusEngine.swift in Sources */,
+				3F89A6D63CB16D7D55A05CCB /* LoginItem.swift in Sources */,
+				A12EA309C32A2EF90E9921D2 /* Preferences.swift in Sources */,
+				99BE0307F1CBF50CC6619DC9 /* PreferencesWindowController.swift in Sources */,
+				7C359587DD840F70833532B8 /* SettingsRow.swift in Sources */,
+				262D15EF6AD42F4C2A7008CD /* ShortcutRecorderView.swift in Sources */,
+				67B7805DDB07224919DF222F /* ShortcutConflicts.swift in Sources */,
+				807AF41F0A9C1A22D77762A3 /* SettingsDetailViewController.swift in Sources */,
+				BD2F3760767BD8FEABBACBD8 /* SettingsSidebarViewController.swift in Sources */,
+				75B09F8D3664D1862A1CFD1B /* SettingsPane.swift in Sources */,
+				F32D6F54D8E982237185EF83 /* StatusItemController.swift in Sources */,
+				1A37A55E75000000000000B3 /* OnboardingWindowController.swift in Sources */,
+				1A37A55E75000000000000B4 /* AboutPane.swift in Sources */,
+				1A37A55E75000000000000B5 /* IgnoredAppsView.swift in Sources */,
+				879FDC63F5987300282471F7 /* VoiceOver.swift in Sources */,
+				D592A19585FC67EB5DB5A328 /* WindowEnumerator.swift in Sources */,
+				668502FD1B2719BDC752C140 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		20D64E44E224459B631E8A39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		6311DFCC3953392D3B42BA9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.netzgut.focustool37.tests;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8E59F20E09B1D1F5E8F4A505 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.netzgut.focustool37.tests;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9042A94D82726BBDA6C129D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Resources/FocusTool37.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3BR2673AY9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.netzgut.focustool37;
+				PRODUCT_NAME = FocusTool37;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+			};
+			name = Release;
+		};
+		9379263E493B8F7858C155E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Resources/FocusTool37.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3BR2673AY9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.netzgut.focustool37;
+				PRODUCT_NAME = FocusTool37;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+			};
+			name = Debug;
+		};
+		A2438F86C4E2F8AC1686E61F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		033B7B54D192B284CC4915F0 /* Build configuration list for PBXNativeTarget "FocusTool37" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9379263E493B8F7858C155E4 /* Debug */,
+				9042A94D82726BBDA6C129D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1226A27AC83D8F4A2F00EA14 /* Build configuration list for PBXNativeTarget "FocusTool37Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6311DFCC3953392D3B42BA9C /* Debug */,
+				8E59F20E09B1D1F5E8F4A505 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6E2A655663BC5DA4A2D5F1B6 /* Build configuration list for PBXProject "FocusTool37" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20D64E44E224459B631E8A39 /* Debug */,
+				A2438F86C4E2F8AC1686E61F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AF09870E61AD60B938E8F970 /* Project object */;
+}
