@@ -18,10 +18,13 @@
 //
 
 import AppKit
+import os
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private(set) weak static var shared: AppDelegate?
+
+    private static let log = Logger(subsystem: "net.netzgut.focustool37", category: "windows")
 
     private var statusItemController: StatusItemController?
     private var preferencesWindowController: PreferencesWindowController?
@@ -190,10 +193,41 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         NSApp.setActivationPolicy(.regular)
-        NSApp.activate()
 
         controller.showWindow(nil)
         window.makeKeyAndOrderFront(nil)
+
+        // GH-ISSUE #1
+        // Since macOS 14, activation is only a request that can be declined,
+        // e.g., when the launch wasn't user-initiated or the active app doesn't yield.
+        // `makeKeyAndOrderFront` alone would then leave the window behind that app's
+        // windows, so it's put on top regardless and becomes key on the first click.
+        window.orderFrontRegardless()
+        NSApp.activate()
+
+        self.confirmActivation(for: window)
+    }
+
+    /// Declined activations are otherwise invisible, which makes them hard to pin down:
+    /// log stream --predicate 'subsystem == "net.netzgut.focustool37" && category == "windows"'
+    private func confirmActivation(for window: NSWindow) {
+        Task { [weak window] in
+            try? await Task.sleep(for: .milliseconds(300))
+
+            guard let window,
+                  window.isVisible,
+                  !NSApp.isActive else {
+                return
+            }
+
+            Self.log.info("""
+            Activation declined for \(window.title, privacy: .public), \
+            \(NSWorkspace.shared.frontmostApplication?.bundleIdentifier ?? "?", privacy: .public) \
+            stayed frontmost; retrying
+            """)
+
+            NSApp.activate()
+        }
     }
 
     @objc private func dockWindowWillClose(_ notification: Notification) {
