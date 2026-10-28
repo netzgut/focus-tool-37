@@ -24,6 +24,17 @@ The grant is tied to the app's code signature, so keep a stable signing identity
 
 ## Install
 
+With [Homebrew](https://brew.sh):
+
+```sh
+brew install --cask netzgut/tap/focus-tool-37
+```
+
+Or download the zip from the [latest release](https://github.com/netzgut/focus-tool-37/releases/latest), unzip it, and move `FocusTool37.app` to your Applications folder.
+Releases are signed and notarized, so they open without Gatekeeper warnings.
+
+To build from source:
+
 ```sh
 open FocusTool37.xcodeproj      # set your signing team, then Run
 ```

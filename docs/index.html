@@ -163,6 +163,61 @@
                 text-align: center;
             }
 
+            /* Homebrew command */
+
+            .brew {
+                margin: 24px auto 0;
+                max-width: 480px;
+            }
+
+            .brew p {
+                margin: 0 0 6px;
+                color: var(--muted);
+                font-size: 0.9rem;
+            }
+
+            .brew-box {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 6px 6px 14px;
+                border: 1px solid var(--line);
+                border-radius: 10px;
+                background: var(--surface);
+            }
+
+            .brew-box code {
+                flex: 1;
+                min-width: 0;
+                overflow-x: auto;
+                font: 0.85rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+                text-align: left;
+                white-space: nowrap;
+            }
+
+            .brew-box button {
+                flex: none;
+                padding: 5px 12px;
+                border: 1px solid var(--line);
+                border-radius: 7px;
+                background: var(--kbd-bg);
+                color: var(--text);
+                font-family: inherit;
+                font-size: 0.8rem;
+                font-weight: 600;
+                line-height: 1.4;
+                cursor: pointer;
+            }
+
+            .brew-box button:hover {
+                border-color: var(--muted);
+            }
+
+            .brew-box button:focus-visible {
+                outline: 3px solid var(--accent);
+                outline-offset: 2px;
+            }
+
             /* Sections */
 
             section {
@@ -385,6 +440,18 @@
                 <p class="meta">
                     macOS 14 or later &middot; Free and open source (Apache 2.0)
                 </p>
+
+                <div class="brew">
+                    <p>Or with <a href="https://brew.sh">Homebrew</a>:</p>
+                    <div class="brew-box">
+                        <code id="brew-command">brew install --cask netzgut/tap/focus-tool-37</code>
+                        <button type="button"
+                                id="brew-copy"
+                                hidden>
+                            Copy
+                        </button>
+                    </div>
+                </div>
             </header>
 
             <section aria-labelledby="what">
@@ -624,5 +691,31 @@
                 </p>
             </footer>
         </main>
+
+        <script>
+            // Shown only where the clipboard API exists, so the button never does nothing.
+            (function () {
+                const button = document.getElementById("brew-copy");
+                const command = document.getElementById("brew-command").textContent;
+
+                if (!navigator.clipboard) {
+                    return;
+                }
+
+                button.hidden = false;
+                button.addEventListener("click", async function () {
+                    try {
+                        await navigator.clipboard.writeText(command);
+                        button.textContent = "Copied";
+                    } catch (error) {
+                        button.textContent = "Select and copy";
+                    }
+
+                    setTimeout(function () {
+                        button.textContent = "Copy";
+                    }, 2000);
+                });
+            })();
+        </script>
     </body>
 </html>
