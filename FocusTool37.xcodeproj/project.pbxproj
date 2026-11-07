@@ -455,6 +455,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = net.netzgut.focustool37;
 				PRODUCT_NAME = FocusTool37;
 				SDKROOT = macosx;
@@ -477,6 +478,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = net.netzgut.focustool37;
 				PRODUCT_NAME = FocusTool37;
 				SDKROOT = macosx;
