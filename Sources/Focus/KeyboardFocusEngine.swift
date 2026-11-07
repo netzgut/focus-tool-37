@@ -28,11 +28,24 @@ final class KeyboardFocusEngine {
     private let highlight = FocusHighlightOverlay()
     private var lastActionTime: ContinuousClock.Instant?
     private var activationCheck: Task<Void, Never>?
+    private var feedbackTask: Task<Void, Never>?
 
     private static let log = Logger(subsystem: "net.netzgut.focustool37", category: "focus")
 
     /// How long a regular activation gets before the AX fallback steps in
     private static let activationGrace: Duration = .milliseconds(150)
+
+    /// The raise lands a few frames after the hotkey, later when the target's
+    /// app has to activate first, and the outline and the cursor ring sit
+    /// above every window.
+    /// Shown right away, they'd draw on top of whatever still covers the
+    /// target, so they wait until it's in front.
+    private static let raisePollInterval: Duration = .milliseconds(8)
+
+    /// Past the activation grace and its AX fallback.
+    /// If the target is still covered by then, something keeps it there, and
+    /// late feedback beats none.
+    private static let raiseTimeout: Duration = .milliseconds(200)
 
     /// Fired after focus actually landed on a window in that direction, so the
     /// status item can point the way.
@@ -163,11 +176,12 @@ final class KeyboardFocusEngine {
             ensureActivated(app)
         }
 
-        self.highlight.flash(around: target.frame,
-                             window: axWindow)
-
         announce(target, axWindow)
-        warpIfAllowed(to: target)
+
+        let warpedTo = warpIfAllowed(to: target)
+        showFeedback(for: target,
+                     axWindow,
+                     pulseAt: warpedTo)
 
         return true
     }
@@ -199,6 +213,44 @@ final class KeyboardFocusEngine {
         }
     }
 
+    /// The cursor warps right away, only the outline and the ring around it
+    /// wait for the raise.
+    /// A newer move cancels a wait that's still running, so a slow raise never
+    /// shows feedback for a window that's no longer the target.
+    private func showFeedback(for target: WindowInfo,
+                              _ axWindow: AXUIElement,
+                              pulseAt pulse: CGPoint?) {
+        self.feedbackTask?.cancel()
+
+        // A previous outline doesn't linger while this one waits for its raise
+        self.highlight.hide()
+
+        self.feedbackTask = Task { [weak self] in
+            await Self.waitUntilUncovered(target.windowID)
+
+            guard !Task.isCancelled, let self else {
+                return
+            }
+
+            highlight.flash(around: target.frame,
+                            window: axWindow)
+
+            if let pulse {
+                CursorPulse.pulse(at: pulse)
+            }
+        }
+    }
+
+    private static func waitUntilUncovered(_ windowID: CGWindowID) async {
+        let deadline = ContinuousClock.now + Self.raiseTimeout
+
+        while !Task.isCancelled,
+              ContinuousClock.now < deadline,
+              WindowEnumerator.isCovered(windowID) {
+            try? await Task.sleep(for: Self.raisePollInterval)
+        }
+    }
+
     private func announce(_ target: WindowInfo,
                           _ axWindow: AXUIElement) {
         guard VoiceOver.isRunning else {
@@ -215,20 +267,21 @@ final class KeyboardFocusEngine {
 
     /// Both branches warp directly, so ⌥⌘L feels identical whether or not the neighbour belongs to another app.
     /// No heuristic needed: the hotkey is the intent and the target is already known.
-    private func warpIfAllowed(to target: WindowInfo) {
+    /// Returns where the cursor landed, nil if it stayed put.
+    private func warpIfAllowed(to target: WindowInfo) -> CGPoint? {
         let center = CGPoint(x: target.frame.midX, y:
                                 target.frame.midY)
         guard let targetDisplay = Displays.id(containing: center) else {
-            return
+            return nil
         }
 
         let cursor = CursorWarp.location
         if self.prefs.warpAcrossDisplaysOnly,
            Displays.id(containing: cursor) == targetDisplay {
-            return // only teleport when otherwise stranded
+            return nil // only teleport when otherwise stranded
         }
 
         CursorWarp.warp(to: center)
-        CursorPulse.pulse(at: center)
+        return center
     }
 }

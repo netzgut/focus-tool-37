@@ -30,26 +30,22 @@ final class FocusHighlightOverlay {
     private static let log = Logger(subsystem: "net.netzgut.focustool37",
                                     category: "highlight")
 
+    /// Takes the current outline down right away, without fading
+    func hide() {
+        self.fadeTask?.cancel()
+        self.window?.orderOut(nil)
+    }
+
     func flash(around cgFrame: CGRect,
                window target: AXUIElement) {
         guard Preferences.shared.showFocusHighlight else {
             return
         }
 
-        let window = self.window ?? Self.makeWindow()
-        self.window = window
-
         self.fadeTask?.cancel()
 
-        // Resolved per flash: the colour can change in preferences, and a
-        // dynamic NSColor also needs re-resolving when the appearance flips.
-        let outline = Preferences.shared.highlightColor ?? .controlAccentColor
-        window.contentView?.layer?.borderColor = outline.cgColor
-        window.contentView?.layer?.borderWidth = Preferences.shared.highlightBorderWidth
-        window.contentView?.layer?.cornerRadius = Self.cornerRadius(of: target)
-        window.setFrame(CocoaCoords.rect(fromCG: cgFrame), display: false)
-        window.alphaValue = 1
-        window.orderFrontRegardless()
+        show(around: cgFrame,
+             cornerRadius: Self.cornerRadius(of: target))
 
         self.fadeTask = Task { [weak self] in
             try? await Task.sleep(for: .milliseconds(150))
@@ -68,6 +64,22 @@ final class FocusHighlightOverlay {
 
             self?.window?.orderOut(nil)
         }
+    }
+
+    private func show(around cgFrame: CGRect,
+                      cornerRadius: CGFloat) {
+        let window = self.window ?? Self.makeWindow()
+        self.window = window
+
+        // Resolved per flash: the colour can change in preferences, and a
+        // dynamic NSColor also needs re-resolving when the appearance flips
+        let outline = Preferences.shared.highlightColor ?? .controlAccentColor
+        window.contentView?.layer?.borderColor = outline.cgColor
+        window.contentView?.layer?.borderWidth = Preferences.shared.highlightBorderWidth
+        window.contentView?.layer?.cornerRadius = cornerRadius
+        window.setFrame(CocoaCoords.rect(fromCG: cgFrame), display: false)
+        window.alphaValue = 1
+        window.orderFrontRegardless()
     }
 
     /// No API reports a window's corner radius, but on macOS 26 a standard

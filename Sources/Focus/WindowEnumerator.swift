@@ -84,4 +84,43 @@ enum WindowEnumerator {
 
         return result
     }
+
+    /// Whether a normal window in front of `windowID` still overlaps it.
+    /// Unlike `onScreenWindows()`, ignored apps and our own windows count:
+    /// they cover the target just the same.
+    static func isCovered(_ windowID: CGWindowID) -> Bool {
+        guard let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements],
+                                                    kCGNullWindowID) as? [[String: Any]] else {
+            return false
+        }
+
+        var inFront: [CGRect] = []
+        for info in list {
+            guard let idValue = info[kCGWindowNumber as String] as? Int,
+                  let boundsDict = info[kCGWindowBounds as String] as? NSDictionary,
+                  let frame = CGRect(dictionaryRepresentation: boundsDict as CFDictionary) else {
+                continue
+            }
+
+            if CGWindowID(idValue) == windowID {
+                // Neighbours sharing an edge overlap by a rounding error, not a pixel
+                return inFront.contains {
+                    let overlap = $0.intersection(frame)
+                    return overlap.width > 1 && overlap.height > 1
+                }
+            }
+
+            guard let layer = info[kCGWindowLayer as String] as? Int,
+                  layer == 0,
+                  let alpha = info[kCGWindowAlpha as String] as? Double,
+                  alpha > 0 else {
+                continue
+            }
+
+            inFront.append(frame)
+        }
+
+        // Gone or off-screen: nothing to wait for
+        return false
+    }
 }
