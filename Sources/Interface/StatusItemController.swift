@@ -144,8 +144,8 @@ final class StatusItemController: NSObject, NSMenuDelegate {
             guard !Task.isCancelled, let self else {
                 return
             }
-            self.lastMove = nil
-            self.updateStatusIcon()
+            lastMove = nil
+            updateStatusIcon()
         }
     }
 
@@ -275,7 +275,7 @@ private enum StatusGlyph {
             }
 
             NSColor.black.setFill()
-            self.draw(in: ctx)
+            draw(in: ctx)
             return true
         }
         image.isTemplate = true

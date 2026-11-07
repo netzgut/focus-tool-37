@@ -119,7 +119,7 @@ final class ShortcutRecorderView: NSView {
                 return event
             }
 
-            return self.handleKeyDown(event)
+            return handleKeyDown(event)
         }
     }
 

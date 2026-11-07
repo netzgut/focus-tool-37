@@ -145,7 +145,7 @@ final class IgnoredAppsView: NSView {
                 return
             }
 
-            self.ignore(urls)
+            ignore(urls)
         }
 
         if let window {

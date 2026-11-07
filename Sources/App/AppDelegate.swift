@@ -288,8 +288,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                     return
                 }
 
-                self.verifyPermission()
-                self.keyboardEngine?.perform(action)
+                verifyPermission()
+                keyboardEngine?.perform(action)
             }
 
             self.hotKeyManager = manager
