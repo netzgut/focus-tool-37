@@ -99,8 +99,8 @@ Because candidates span every display, moving right simply continues onto the ne
 
 Two settings can tune the behavior:
 
-* **Edge slop**: How much overlap still counts as a clean neighbour (default: 8 pt)
-* **Cone angle**: The fallback search cone (default: 45°)
+- **Edge slop**: How much overlap still counts as a clean neighbour (default: 8 pt)
+- **Cone angle**: The fallback search cone (default: 45°)
 
 ## Accessibility
 
