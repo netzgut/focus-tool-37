@@ -31,6 +31,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         didSet {
             self.updatePermissionItems()
             self.updateStatusIcon()
+            self.updateVisibility()
         }
     }
 
@@ -46,6 +47,9 @@ final class StatusItemController: NSObject, NSMenuDelegate {
     private let permissionActionItem: NSMenuItem
     private let permissionSeparator: NSMenuItem
     private let focusEnabledItem: NSMenuItem
+
+    private var visibilityObservation: NSKeyValueObservation?
+    private var isApplyingVisibility = false
 
     /// The last jump, shown as a ray off the dot until `moveDisplayTime` passes
     private var lastMove: Direction?
@@ -106,6 +110,16 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         menu.addItem(quitItem)
 
         self.statusItem.menu = menu
+
+        // ⌘-dragging the item out of the menu bar hides it as well, and the
+        // switch in settings has to follow.
+        self.statusItem.behavior = .removalAllowed
+        self.visibilityObservation = self.statusItem.observe(\.isVisible) { [weak self] item, _ in
+            let visible = item.isVisible
+            MainActor.assumeIsolated {
+                self?.visibilityChanged(visible)
+            }
+        }
 
         // The glyph tracks the master switch, which the prefs window can flip
         // too.
@@ -183,8 +197,31 @@ final class StatusItemController: NSObject, NSMenuDelegate {
 
     private func refreshState() {
         updateStatusIcon()
+        updateVisibility()
 
         self.focusEnabledItem.state = self.prefs.focusEnabled ? .on : .off
+    }
+
+    /// Shown regardless while Accessibility access is missing: the menu is
+    /// where the way to grant it lives.
+    private func updateVisibility() {
+        let visible = self.prefs.showMenuBarIcon || self.permissionState != .granted
+        guard self.statusItem.isVisible != visible else {
+            return
+        }
+
+        self.isApplyingVisibility = true
+        self.statusItem.isVisible = visible
+        self.isApplyingVisibility = false
+    }
+
+    private func visibilityChanged(_ visible: Bool) {
+        guard !self.isApplyingVisibility,
+              visible != self.prefs.showMenuBarIcon else {
+            return
+        }
+
+        self.prefs.showMenuBarIcon = visible
     }
 
     private func updatePermissionItems() {

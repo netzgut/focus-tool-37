@@ -20,7 +20,8 @@
 import AppKit
 
 /// The right-hand side of the settings window:
-/// an optional pinned banner over one scrolling pane.
+/// an optional pinned banner over one scrolling pane, over an optional pinned
+/// footer.
 ///
 /// Panes are swapped by replacing the scroll view's document view.
 /// Each pane gets its own document view, built once on first show and kept, so the
@@ -39,6 +40,7 @@ final class SettingsDetailViewController: NSViewController {
 
     private let bannerContainer = NSView()
     private let scrollView = NSScrollView()
+    private let footerContainer = NSView()
     private var documents: [ObjectIdentifier: NSView] = [:]
 
     /// Pinned above the pane rather than placed in one: it gates every feature
@@ -85,9 +87,13 @@ final class SettingsDetailViewController: NSViewController {
 
         self.bannerContainer.translatesAutoresizingMaskIntoConstraints = false
 
+        self.footerContainer.translatesAutoresizingMaskIntoConstraints = false
+        self.footerContainer.isHidden = true
+
         let stack = NSStackView(views: [
             self.bannerContainer,
-            self.scrollView
+            self.scrollView,
+            self.footerContainer
         ])
         stack.orientation = .vertical
         stack.alignment = .leading
@@ -100,17 +106,23 @@ final class SettingsDetailViewController: NSViewController {
 
         NSLayoutConstraint.activate([
             self.bannerContainer.widthAnchor.constraint(equalTo: stack.widthAnchor),
-            self.scrollView.widthAnchor.constraint(equalTo: stack.widthAnchor)
+            self.scrollView.widthAnchor.constraint(equalTo: stack.widthAnchor),
+            self.footerContainer.widthAnchor.constraint(equalTo: stack.widthAnchor)
         ])
 
         self.view = stack
     }
 
-    func show(_ pane: NSView) {
+    /// The footer stays in the window's bottom-right corner, below the scroll
+    /// view, however tall the pane is.
+    func show(_ pane: NSView,
+              footer: NSView? = nil) {
         let document = self.document(for: pane)
         resize(document,
                toFit: pane)
         self.scrollView.documentView = document
+
+        setFooter(footer)
 
         // Every pane opens at its top
         self.scrollView.contentView.scroll(to: .zero)
@@ -118,11 +130,43 @@ final class SettingsDetailViewController: NSViewController {
     }
 
     /// Height the window needs to show `pane` without scrolling, banner aside.
-    func height(for pane: NSView) -> CGFloat {
+    func height(for pane: NSView,
+                footer: NSView? = nil) -> CGFloat {
         let document = self.document(for: pane)
         resize(document,
                toFit: pane)
-        return document.frame.height + Self.titleBarInset
+
+        let footerHeight = footer.map { $0.fittingSize.height + Self.margin } ?? .zero
+
+        return document.frame.height + footerHeight + Self.titleBarInset
+    }
+
+    /// The pane's own bottom margin already separates it from the footer, so
+    /// only the window edge gets one.
+    private func setFooter(_ footer: NSView?) {
+        guard footer?.superview !== self.footerContainer else {
+            return
+        }
+
+        self.footerContainer.subviews.forEach { $0.removeFromSuperview() }
+        self.footerContainer.isHidden = footer == nil
+
+        guard let footer else {
+            return
+        }
+
+        footer.translatesAutoresizingMaskIntoConstraints = false
+        self.footerContainer.addSubview(footer)
+
+        NSLayoutConstraint.activate([
+            footer.leadingAnchor.constraint(greaterThanOrEqualTo: self.footerContainer.leadingAnchor,
+                                            constant: Self.margin),
+            footer.trailingAnchor.constraint(equalTo: self.footerContainer.trailingAnchor,
+                                             constant: -Self.margin),
+            footer.topAnchor.constraint(equalTo: self.footerContainer.topAnchor),
+            footer.bottomAnchor.constraint(equalTo: self.footerContainer.bottomAnchor,
+                                           constant: -Self.margin)
+        ])
     }
 
     /// Panes are measured before the window has ever laid out, when wrapping

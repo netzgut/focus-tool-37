@@ -1701,6 +1701,40 @@
         }
       }
     },
+    "settings.show-menu-bar-icon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In der Menüleiste anzeigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show in menu bar"
+          }
+        }
+      }
+    },
+    "settings.show-menu-bar-icon.explanation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ist es ausgeblendet, öffne Focus Tool 37 erneut, um zu diesen Einstellungen zu gelangen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "While hidden, open Focus Tool 37 again to get back to these settings."
+          }
+        }
+      }
+    },
     "settings.vim-keys" : {
       "extractionState" : "manual",
       "localizations" : {

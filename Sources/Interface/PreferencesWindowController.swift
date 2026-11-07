@@ -36,12 +36,16 @@ final class PreferencesWindowController: NSWindowController {
     /// control whichever pane happens to be showing.
     private var panes: [SettingsPane: NSView] = [:]
 
+    /// Pinned below a pane's scroll view rather than placed in the pane.
+    private var footers: [SettingsPane: NSView] = [:]
+
     /// Accessibility permission banner
     private var permissionSection: NSView!
 
     // General
     private var focusEnabledSwitch: NSSwitch!
     private var loginSwitch: NSSwitch!
+    private var menuBarIconSwitch: NSSwitch!
     private var warpAcrossSwitch: NSSwitch!
     private var warpAcrossRow: SettingsRow!
 
@@ -142,6 +146,10 @@ final class PreferencesWindowController: NSWindowController {
             .about: AboutPane.make()
         ]
 
+        self.footers = [
+            .general: makeQuitButton()
+        ]
+
         self.detail.contentWidth = Self.contentWidth
         self.detail.banner = makePermissionSection()
 
@@ -196,7 +204,8 @@ final class PreferencesWindowController: NSWindowController {
 
             if let view = self.panes[pane] {
                 tallest = max(tallest,
-                              self.detail.height(for: view))
+                              self.detail.height(for: view,
+                                                 footer: self.footers[pane]))
             }
         }
 
@@ -227,7 +236,8 @@ final class PreferencesWindowController: NSWindowController {
             return
         }
 
-        self.detail.show(view)
+        self.detail.show(view,
+                         footer: self.footers[pane])
     }
 
     // MARK: - Panes
@@ -255,15 +265,28 @@ final class PreferencesWindowController: NSWindowController {
     private func makeGeneralPane() -> NSView {
         self.focusEnabledSwitch = toggle(#selector(self.toggleFocusEnabled))
         self.loginSwitch = toggle(#selector(self.toggleLogin))
+        self.menuBarIconSwitch = toggle(#selector(self.toggleMenuBarIcon))
 
         return Settings.pane(SettingsPane.general.title, groups: [
             Settings.group(rows: [
                 SettingsRow(title: String(localized: "settings.focus-enabled"),
                             control: self.focusEnabledSwitch),
                 SettingsRow(title: String(localized: "settings.launch-at-login"),
-                            control: self.loginSwitch)
+                            control: self.loginSwitch),
+                SettingsRow(title: String(localized: "settings.show-menu-bar-icon"),
+                            subtitle: String(localized: "settings.show-menu-bar-icon.explanation"),
+                            control: self.menuBarIconSwitch)
             ])
         ])
+    }
+
+    /// With the menu bar icon hidden, the menu's Quit item is gone too.
+    private func makeQuitButton() -> NSView {
+        let button = NSButton(title: String(localized: "menu-item.quit-app"),
+                              target: NSApp,
+                              action: #selector(NSApplication.terminate(_:)))
+        button.bezelStyle = .rounded
+        return button
     }
 
     private func makeKeyboardPane() -> NSView {
@@ -453,6 +476,7 @@ final class PreferencesWindowController: NSWindowController {
 
         self.focusEnabledSwitch.state = self.prefs.focusEnabled ? .on : .off
         self.loginSwitch.state = LoginItem.isEnabled ? .on : .off
+        self.menuBarIconSwitch.state = self.prefs.showMenuBarIcon ? .on : .off
 
         self.warpAcrossSwitch.state = self.prefs.warpAcrossDisplaysOnly ? .on : .off
         self.warpAcrossRow.isEnabled = self.prefs.focusEnabled
@@ -526,6 +550,10 @@ final class PreferencesWindowController: NSWindowController {
     @objc private func toggleLogin() {
         LoginItem.setEnabled(self.loginSwitch.state == .on)
         self.refresh()
+    }
+
+    @objc private func toggleMenuBarIcon() {
+        self.prefs.showMenuBarIcon = self.menuBarIconSwitch.state == .on
     }
 
     @objc private func toggleWarpAcross() {

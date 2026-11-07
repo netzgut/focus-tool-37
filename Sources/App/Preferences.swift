@@ -30,6 +30,7 @@ final class Preferences {
 
     private enum Key {
         static let focusEnabled = "focusEnabled"
+        static let showMenuBarIcon = "showMenuBarIcon"
         static let warpAcrossDisplaysOnly = "warpAcrossDisplaysOnly"
         static let navVimKeys = "navVimKeys"
         static let navArrowKeys = "navArrowKeys"
@@ -58,6 +59,7 @@ final class Preferences {
     private init() {
         self.defaults.register(defaults: [
             Key.focusEnabled: true,
+            Key.showMenuBarIcon: true,
             Key.warpAcrossDisplaysOnly: false,
             Key.navVimKeys: true,
             Key.navArrowKeys: true,
@@ -80,6 +82,18 @@ final class Preferences {
         }
         set {
             self.defaults.set(newValue, forKey: Key.focusEnabled)
+            self.notify()
+        }
+    }
+
+    /// Hidden, the settings window is the only way in: opening the app again
+    /// shows it.
+    var showMenuBarIcon: Bool {
+        get {
+            self.defaults.bool(forKey: Key.showMenuBarIcon)
+        }
+        set {
+            self.defaults.set(newValue, forKey: Key.showMenuBarIcon)
             self.notify()
         }
     }
